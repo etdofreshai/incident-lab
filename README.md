@@ -2,6 +2,26 @@
 
 Incident Lab is a medium-large Autopilot evaluation project: a local-first incident command simulator and operations dashboard.
 
+## Running locally
+
+This slice uses vanilla browser modules and deterministic Node tests; no external services or build step are required.
+
+```bash
+npm test
+npm run check
+python3 -m http.server 8080
+```
+
+Then open <http://localhost:8080>.
+
+## Implemented slice
+
+- Pure incident model/reducer with deterministic normalization.
+- Built-in checkout latency scenario and step-through simulator.
+- Dashboard shell for command state, service impact, timeline, actions, brief, and postmortem draft.
+- LocalStorage persistence plus JSON export/import and download.
+- Automated tests for reducer effects, metrics, generated briefs, postmortems, and JSON round-trip.
+
 It is more complex than Trailmix but still bounded: no external services, no real paging, no cloud APIs. Everything should run locally in the browser and with deterministic tests.
 
 ## Product goal

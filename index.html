@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Incident Lab</title>
+    <link rel="stylesheet" href="./src/styles.css">
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Local-first simulator</p>
+        <h1>Incident Lab</h1>
+        <p>Run deterministic incident scenarios, command the response, and generate briefs and postmortem drafts without external services.</p>
+      </div>
+      <div class="hero-actions">
+        <button id="exportJson">Export JSON</button>
+        <button id="downloadJson">Download</button>
+        <button id="reset" class="secondary">Reset</button>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="card span-2">
+        <h2>Incident command</h2>
+        <form id="incidentForm" class="incident-form">
+          <label>Title <input id="title" autocomplete="off"></label>
+          <label>Severity <select id="severity"><option>SEV1</option><option>SEV2</option><option>SEV3</option><option>SEV4</option></select></label>
+          <label>Status <select id="status"><option>investigating</option><option>identified</option><option>monitoring</option><option>resolved</option></select></label>
+          <label>Commander <input id="commander" autocomplete="off"></label>
+          <label class="span-2">Current hypothesis <input id="hypothesis" autocomplete="off"></label>
+          <label>Next update <input id="nextUpdateAt" type="datetime-local"></label>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Scenario simulator</h2>
+        <select id="scenarioSelect"></select>
+        <div class="button-row">
+          <button id="loadScenario" class="secondary">Load</button>
+          <button id="stepScenario">Apply next event</button>
+        </div>
+        <p id="scenarioProgress" class="muted"></p>
+      </section>
+
+      <section class="card">
+        <h2>Service impact</h2>
+        <ul id="services" class="stack"></ul>
+      </section>
+
+      <section class="card span-2">
+        <h2>Generated incident brief</h2>
+        <div id="brief" class="brief"></div>
+      </section>
+
+      <section class="card">
+        <h2>Add timeline event</h2>
+        <select id="eventKind">
+          <option value="detection">detection</option>
+          <option value="impact-update">impact update</option>
+          <option value="mitigation">mitigation</option>
+          <option value="decision">decision</option>
+          <option value="comms">comms</option>
+          <option value="customer-report">customer report</option>
+          <option value="metric-observation">metric observation</option>
+          <option value="handoff">handoff</option>
+          <option value="resolution">resolution</option>
+        </select>
+        <textarea id="eventSummary" placeholder="What changed?"></textarea>
+        <button id="addEvent">Append event</button>
+      </section>
+
+      <section class="card">
+        <h2>Add action item</h2>
+        <input id="actionTitle" placeholder="Action title">
+        <input id="actionOwner" placeholder="Owner">
+        <button id="addAction">Add action</button>
+      </section>
+
+      <section class="card">
+        <h2>Timeline</h2>
+        <ol id="timeline" class="timeline"></ol>
+      </section>
+
+      <section class="card">
+        <h2>Action items</h2>
+        <ul id="actions" class="stack"></ul>
+      </section>
+
+      <section class="card span-2">
+        <h2>Postmortem draft</h2>
+        <textarea id="postmortem" class="postmortem" readonly></textarea>
+      </section>
+
+      <section class="card span-2">
+        <h2>JSON import/export</h2>
+        <textarea id="jsonBox" class="json" placeholder="Click Export JSON, or paste incident JSON and import."></textarea>
+        <button id="importJson">Import JSON</button>
+      </section>
+    </main>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
